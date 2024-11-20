@@ -1,0 +1,107 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+    font-size: 20px;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* reset body line height*/
+body {
+    font-family:  'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #5E17E8, #7E45ED, #9a7ada );
+  min-height: 100vh;
+  line-height: 1;
+  text-rendering: optimizeSpeed;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+
+header{
+    display: flex;
+    max-width:50vw ;
+    gap: 6rem;
+    margin: auto;
+    border-bottom: 1px solid #9a7ada;
+    border-bottom-left-radius: 0.5rem;
+}
+.timers-list, #logo{
+    padding: 2rem 1.5rem 0;
+}
+#logo{
+    font-family: Gugi;
+    padding-bottom: 0.7rem;
+    border-bottom: 4px solid #fff;
+    border-radius: 0.5rem
+}
+.timers-list{
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+
+main{
+    flex: 60%;
+    margin-top: 5rem;
+}
+
+
+.block-date-input-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    gap: 1rem;
+}
+
+.current-date-time{
+    margin-left: 0.5rem;
+}
+
+input[type="datetime-local"]{
+    width: 250px;
+    height: 40px;
+    font-size: 18px;
+}
+
+.count-down-container{
+    min-width: 70vw;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter-column{
+    min-width: 10%;
+    width: 20vh;
+    height: 20vh;
+    border: 2px solid #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+.timer{
+    padding: 1rem 0 2rem 0;
+}
+
+.counter-label{
+    border-top: 2px solid #fff;
+    padding-top: 0.8rem;
+}
+
+footer{
+    text-align: center;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CountDown</title>
+    <link rel="stylesheet" href="style/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gugi&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 id="logo">DownCount</h1>
+        <ul class="timers-list">
+            <li>Days</li>
+            <li>Hours</li>
+            <li>Minutes</li>
+            <li>Seconds</li>
+        </ul>
+    </header>
+
+    <main>
+            <!-- date time input and current date display -->
+            <section class="block-date-input-info">
+                <div class="current-date-block">
+                    <label for="current-date-time">Today:</label>
+                    <input type="datetime-local" name="current-date-time" class="current-date-time" id="current-date-time" disabled>
+                </div>
+                <div class="date-time-to-block">
+                    <label for="date-time-to">Due on:</label>
+                    <input type="datetime-local" class="date-time-to"  id="date-time-to">
+                </div>
+            </section>
+        
+            <!-- count down display -->
+            <section class="count-down-container">
+                <!-- /days columns -->
+                <div class="counter-column">
+                    <p class="counter-day timer">0</p>
+                    <p class="counter-label">Days</p>
+                </div>
+                <div class="counter-column">
+                    <p class="counter-hours timer">0</p>
+                    <p class="counter-label">Hours</p>
+                </div>
+                <div class="counter-column">
+                    <p class="counter-minutes timer">0</p>
+                    <p class="counter-label">Minutes</p>
+                </div>
+                <div class="counter-column">
+                    <p class="counter-seconds timer">0</p>
+                    <p class="counter-label">Seconds</p>
+                </div>
+            </section>
+    </main>
+     <footer>&copy; 2024</footer>
+</body>
+</html>
