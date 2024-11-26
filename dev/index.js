@@ -9,7 +9,7 @@ function ExtractTimeComponents(dueDateValue){
 
     //time span between the current date and the due date.
     const now = new Date(); //current date : today
-    const timeSpan = dueDate - now; // time span (difference) in milliseconds. 
+    const timeSpan = dueDateValue - now; // time span (difference) in milliseconds. 
     console.log(`Now: ${now}\nDue date: ${dueDate}\nTime span: ${timeSpan}`);
 
     //save second, minute, hour, and day equivalent time value in milliseconds.
@@ -34,6 +34,24 @@ function ExtractTimeComponents(dueDateValue){
 
     console.log(`days: ${days} - hours: ${hours} - minutes: ${minutes} - seconds: ${seconds}`);
 
+    let timeUnitesMap = new Map([[days, timeUnitsInMilliseconds.day] , [hours, timeUnitsInMilliseconds.hour], [minutes, timeUnitsInMilliseconds.minute], [seconds, timeUnitsInMilliseconds.second]]);
+    return timeUnitesMap;
 }
 
 ExtractTimeComponents(dueDate);
+
+function countDown(dueDateValue){
+    const timeMap = ExtractTimeComponents(dueDate);
+    let countDownInterval;
+    timeMap.forEach((key, value) => {
+        while(key > 0)
+        {
+            countDown = setInterval(() => {
+                key--;
+            }, value);
+        }
+        clearInterval(countDown);
+        
+    });
+
+}
