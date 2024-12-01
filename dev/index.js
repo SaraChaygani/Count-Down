@@ -1,4 +1,4 @@
-import { currentDatetime, ConverDateFormat } from "../untility/untilities.js";
+import { currentDatetime, ConverDateFormat } from "../utility/untilities.js";
 
 document.querySelector('.current-date-time').value = currentDatetime();
 
