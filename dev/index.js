@@ -1,57 +1,57 @@
-import { currentDatetime } from "../untility/untilities.js";
+import { currentDatetime, ConverDateFormat } from "../untility/untilities.js";
 
-//testing fixed dates.
-const dueDate = new Date(2024, 10, 28, 18, 2, 5);
+document.querySelector('.current-date-time').value = currentDatetime();
+
+const dueDateElement = document.querySelector('.date-time-to');
+dueDateElement.value = ConverDateFormat(localStorage.getItem('dueDateValue'));
+dueDateElement.setAttribute('min', currentDatetime());
 
 
-// extracting time components of due date. the due date should be greater than the current date.
-function ExtractTimeComponents(dueDateValue){
+const countDown = ()=>{
+    // let dueDateValue = new Date(localStorage.getItem('dueDateValue'));
+    let timerInterval;
+    timer();
+    //Getting the elements from html
+    const daysElement = document.querySelector('.js-counter-days');
+    const hoursElement = document.querySelector('.js-counter-hours');
+    const minutesElement = document.querySelector('.js-counter-minutes');
+    const secondsElement = document.querySelector('.js-counter-seconds');
 
-    //time span between the current date and the due date.
-    const now = new Date(); //current date : today
-    const timeSpan = dueDateValue - now; // time span (difference) in milliseconds. 
-    console.log(`Now: ${now}\nDue date: ${dueDate}\nTime span: ${timeSpan}`);
+    function displayTime(timeSpan){
+        daysElement.textContent = Math.floor(timeSpan / 86400);
+        hoursElement.textContent = Math.floor((timeSpan % 86400) / 3600);
+        minutesElement.textContent = Math.floor((timeSpan % 86400) % 3600 / 60);
+        secondsElement.textContent = Math.floor(timeSpan % 60 < 10 ? `0${timeSpan % 60}` : timeSpan % 60);   
+     }
+    //Setting an interval that rcalculate the difference every second and displays it on the page.
+    function timer(){
+        let dueDateValue = new Date(localStorage.getItem('dueDateValue'));
+         timerInterval = setInterval(() => {
+            const now = new Date(); //current date : today
+            const timeDifferenceInSeconds = (dueDateValue - now) / 1000; // time span (difference) in milliseconds devided by 1000 to give us the difference in seconds. 
+            if(timeDifferenceInSeconds <= 0){
+                clearInterval(timerInterval);
+                return;
+            }
+            displayTime(timeDifferenceInSeconds);
+        }, 1000);
+       }
 
-    //save second, minute, hour, and day equivalent time value in milliseconds.
-    const timeUnitsInMilliseconds ={
-        second: 1000, //1000 ms
-        minute: 1000 * 60, // 60,000 ms
-        hour: 1000 * 60 * 60, //3,600,000 ms
-        day: 1000 * 60 * 60 * 24 //86,400,000 ms
-    }
+       //on every datetime change the timer will be rest and count down the new date.
+       
+       dueDateElement.addEventListener('change' ,()=> {
+        clearInterval(timerInterval);
+        localStorage.clear();
+            localStorage.setItem('dueDateValue', new Date(dueDateElement.value));
+            timer();  
+    });   
 
-    // Convert milliseconds to total days.
-    let days = Math.floor(timeSpan / timeUnitsInMilliseconds.day);
-
-    //calculate the remaining hours after extracting the days.
-    let hours = Math.floor((timeSpan % timeUnitsInMilliseconds.day) / timeUnitsInMilliseconds.hour);
-
-    //calculate the remaining minutes after extrating the hours.
-    let minutes = Math.floor((timeSpan % timeUnitsInMilliseconds.hour) / timeUnitsInMilliseconds.minute);
-
-    //calculate the remaining seconds after extracting the minutes.
-    let seconds = Math.floor((timeSpan % timeUnitsInMilliseconds.minute) / timeUnitsInMilliseconds.second);
-
-    console.log(`days: ${days} - hours: ${hours} - minutes: ${minutes} - seconds: ${seconds}`);
-
-    let timeUnitesMap = new Map([[days, timeUnitsInMilliseconds.day] , [hours, timeUnitsInMilliseconds.hour], [minutes, timeUnitsInMilliseconds.minute], [seconds, timeUnitsInMilliseconds.second]]);
-    return timeUnitesMap;
-}
-
-ExtractTimeComponents(dueDate);
-
-function countDown(dueDateValue){
-    const timeMap = ExtractTimeComponents(dueDate);
-    let countDownInterval;
-    timeMap.forEach((key, value) => {
-        while(key > 0)
-        {
-            countDown = setInterval(() => {
-                key--;
-            }, value);
+    dueDateElement.addEventListener('input', () => {
+        if(!dueDateElement.value){
+            dueDateElement.value = currentDatetime();
+            localStorage.setItem('dueDateValue', new Date());
+            displayTime(0);
         }
-        clearInterval(countDown);
-        
-    });
-
+    })
 }
+countDown();
